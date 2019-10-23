@@ -270,6 +270,16 @@ const getCountryCurrency = (balance, code) => {
 
   return `${sign}${amount}`;
 };
+
+const memoize = fn => { 
+    let cache = {}; 
+    return (...args) => { 
+      let stringifiedArgs = JSON.stringify(args)
+      let result = cache[stringifiedArgs] = cache[stringifiedArgs] || fn(...args)
+      return result;
+    }
+  }
+
  export {
     compose,
     curry,
@@ -291,5 +301,5 @@ const getCountryCurrency = (balance, code) => {
     isEqualDate,
     monthDiff,
     keyCodes,
-    capitalize, addTwoDPZero, getCountryCurrency 
+    capitalize, addTwoDPZero, getCountryCurrency, memoize
     }
