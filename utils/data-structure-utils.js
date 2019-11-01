@@ -10,6 +10,43 @@ Other use cases
 query databases with an API
 Or const id = await db.insertUserReturningId(userInfo)
 // Runs an INSERT INTO user ... RETURNING id
+
+import axios from 'axios'
+
+const instance = axios.create({baseURL: 'http://localhost:3000/api'})
+
+const handler = {
+
+    get(target, name){
+        return Object.assign({}, ['get', 'post', 'put', delete']
+        .reduce((obj, method) => {
+            Object.assign({}, obj, {
+                [method](url = '', body={}, params={}){
+                    if(mehod === 'get' || method === 'delete'){
+                        return instance.request({
+                            url,
+                            method,
+                            params: data,
+                            haders:{'auth-token' : token}
+                        })
+                    }esle{
+                        return instance.request({
+                            url,
+                            method,
+                            data: body,
+                            headers{'auth-token': token}
+                        })
+                    }
+                }
+            })
+        }, {})
+
+    }
+}
+
+const api = new Proxy({}, handler)
+api.converstaion.get().then(converstaion) => console.log(converstaion))
+api.converstaions.post(...converstions).then(converstaion) => console.log(converstaion))
 */
 
 
