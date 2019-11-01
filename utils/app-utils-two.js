@@ -226,6 +226,20 @@ const round = number => Math.round(number * 10) / 10;
 
 const isEmptyObj = obj => Object.keys(obj).length === 0;
 
+/*
+Entropy is a measure of an information conveyed by a certain piece of text (or in general 
+piece of information). 
+Intuitively— the bigger the entropy, the more random the information is.
+*/
+// from https://gist.github.com/kulak-at/e74f7fa090eedab29c7e7a79485cab6f
+
+const entropy = str => [...new Set(str)]
+  .map(chr => Array.from(str).filter(c => c === chr).length)
+  .reduce((sum, frequency) => {
+    const p = frequency / str.length;
+    return sum + p * Math.log2(1 / p);
+  }, 0);
+
 export {
   compose,
   uppercaseSplit,
@@ -244,5 +258,6 @@ export {
   blobSupported,
   msSaveOrOpenBlobSupported,
   convertTimestampToDate,
-  isEmptyObj
+  isEmptyObj,
+  entropy
 };
